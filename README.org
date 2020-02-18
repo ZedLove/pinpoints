@@ -1,0 +1,32 @@
+#+TITLE:     Pinpoints
+#+SUBTITLE:  Create a map of custom pinpoints to log memories on your travels
+#+AUTHOR:    Zak Nitsch
+#+DESCRIPTION: Org mode syntax example
+#+LANGUAGE:  en
+#+TODO: TODO IN-PROGRESS BLOCKED DONE
+#+OPTIONS:   num:nil toc:nil p:t
+
+* Pinpoints
+** TODO add links
+  A small JavaScript application built with React and node to log points on a map.
+  This project uses React Map GL to display a Mapbox map. The client gets data via \\
+  a node backend connected to a MongoDB store. 
+** Setup
+   Ensure you have =mongodb= and =node= and =npm= installed
+*** Server
+    You will need to create a =.env= file based on =/server/.env.example=
+    - =npm i= :: install dependencies
+    - =npm run dev= :: run development server
+*** Client
+    - =yarn install= :: install dependencies
+    - =yarn start= :: start local development server
+** Current Functionality
+*** displays a mapbox map centered around the Great Lakes
+*** displays points (if any) from the DB
+*** points have popups with more data
+*** new points can be created via double-clicking the map
+** Roadmap
+*** TODO deploy server
+*** TODO deploy client
+*** TODO add more roadmap
+

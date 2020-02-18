@@ -1,7 +1,7 @@
 {
-  "name": "travel-log",
+  "name": "pinpoints-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "An API to store geographical log entries",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
