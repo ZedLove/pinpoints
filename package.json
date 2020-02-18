@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-feather": "^2.0.3",
+    "react-hook-form": "^4.9.6"
+  }
+}
