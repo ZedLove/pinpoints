@@ -1,4 +1,7 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:0420/api'
+const API_URL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:0420/api'
+    : process.env.REACT_APP_API_URL
 
 export async function listLogEntries() {
   const resp = await fetch(`${API_URL}/logs`)

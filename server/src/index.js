@@ -22,20 +22,29 @@ mongoose
       console.log('DB connected')
     }
   )
-  .catch(err => console.log(err)) // TODO - not catching anything, even though this is from their docs
+  .catch(err => {
+    console.log(err)
+  }) // TODO - not catching anything, even though this is from their docs
+
+const db = mongoose.connection
+db.on('error', err => {
+  console.error(`MongoDB connection error: ${err}`)
+})
 
 app.use(morgan('common'))
 app.use(helmet())
 app.use(
   cors({
-    origin: process.env.CORS_ORIGN
+    origin: process.env.CORS_ORIGIN
   })
 )
 app.use(express.json())
 
 app.get('/', (_, res) => {
+  // TODO - handle root route properly
   res.json({
-    message: 'msg'
+    cors: process.env.CORS_ORIGIN,
+    env: process.env.NODE_ENV
   })
 })
 

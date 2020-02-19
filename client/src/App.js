@@ -39,7 +39,8 @@ const App = () => {
       onClick={() => {
         setShowEntry({})
       }}
-      onDblClick={showAddMarkerPopup}>
+      onDblClick={showAddMarkerPopup}
+      doubleClickZoom={false}>
       {logEntries.map(le => (
         <Fragment key={le._id}>
           <Marker latitude={le.latitude} longitude={le.longitude} className='entry-marker'>
@@ -78,7 +79,7 @@ const App = () => {
             <MapPin className='map-pin' color='#b00b13' />
           </Marker>
           <Popup
-            className='popup'
+            className='entry-popup'
             latitude={addEntryLocation.latitude}
             longitude={addEntryLocation.longitude}
             closeButton={true}

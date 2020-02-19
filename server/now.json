@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "name": "pinpoints",
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "src/index.js"
+    }
+  ],
+  "alias": ["pinpoints"],
+  "env": {
+    "PORT": "0420",
+    "DB_URL": "@mongo-now-test-db",
+    "CORS_ORIGIN": "https://pinpoints-client.now.sh"
+  }
+}

@@ -1,32 +1,50 @@
 #+TITLE:     Pinpoints
 #+SUBTITLE:  Create a map of custom pinpoints to log memories on your travels
 #+AUTHOR:    Zak Nitsch
-#+DESCRIPTION: Org mode syntax example
+#+DESCRIPTION: Information for setting up and running Pinpoints
 #+LANGUAGE:  en
 #+TODO: TODO IN-PROGRESS BLOCKED DONE
 #+OPTIONS:   num:nil toc:nil p:t
 
 * Pinpoints
-** TODO add links
+  This project is currently deployed live, and very much work-in-progress, \\
+  at: https://pinpoints-client.now.sh/. Please see the [[#roadmap][Roadmap]] for more information.
   A small JavaScript application built with React and node to log points on a map.
-  This project uses React Map GL to display a Mapbox map. The client gets data via \\
+  This project uses [[https://uber.github.io/react-map-gl/][React Map GL]] to display a [[https://www.mapbox.com/][Mapbox]] map. The client gets data via \\
   a node backend connected to a MongoDB store. 
-** Setup
-   Ensure you have =mongodb= and =node= and =npm= installed
-*** Server
-    You will need to create a =.env= file based on =/server/.env.example=
-    - =npm i= :: install dependencies
-    - =npm run dev= :: run development server
-*** Client
-    - =yarn install= :: install dependencies
-    - =yarn start= :: start local development server
-** Current Functionality
-*** displays a mapbox map centered around the Great Lakes
-*** displays points (if any) from the DB
-*** points have popups with more data
-*** new points can be created via double-clicking the map
-** Roadmap
-*** TODO deploy server
-*** TODO deploy client
-*** TODO add more roadmap
-
+* Setup
+  Ensure you have =mongodb= and =node= and =npm= installed
+** Server
+   You will need to create a =.env= file based on =/server/.env.example=
+   - =npm i= :: install dependencies
+   - =npm run dev= :: run development server
+** Client
+   - =yarn install= :: install dependencies
+   - =yarn start= :: start local development server
+* Current Functionality
+  * displays a mapbox map centered around the Great Lakes
+  * displays points (if any) from the DB
+  * points have popups with more data
+  * new points can be created via double-clicking the map
+* Roadmap [2/9]
+  * [ ] add links to this doc (references, deployment info)
+  * [X] deploy server
+  * [X] deploy client
+  * [ ] UI enhancements [0/4]
+    * [ ] bootstrap
+    * [ ] theme
+    * [ ] logo?
+    * [ ] sync across sessions
+  * [ ] image uploads
+  * [ ] set defaults for quick-add [0/2]
+    * [ ] use geolocation ([[https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol][GeolocateControl]])
+    * [ ] use Date.now() for visitedAt (not in UI)
+  * [ ] search for real locations [0/3]
+    * [ ] find API
+    * [ ] query API from backend
+    * [ ] build frontend component and plumb to backend
+  * [ ] multi-tenancy
+  * [ ] deep-linking to entries
+* Known Issues
+  * Dates are not localized in/out of DB
+  * map captures keybaord input and moves map when using arrow keys
