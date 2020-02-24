@@ -14,5 +14,12 @@ export async function createLogEntry(entry) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(entry)
   })
-  return resp.json()
+  const json = await resp.json()
+  if (resp.ok) {
+    return json
+  }
+
+  const error = new Error(json.message)
+  error.response = json
+  throw error
 }
