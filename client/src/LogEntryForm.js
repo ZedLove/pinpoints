@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
+import { DatePicker } from '@material-ui/pickers'
+import TextField from '@material-ui/core/TextField'
+import { Controller, useForm } from 'react-hook-form'
 
 import { createLogEntry } from './API'
 
 const LogEntryForm = ({ location, onClose }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const { register, handleSubmit, watch, errors } = useForm()
+  const { control, register, handleSubmit, watch, errors } = useForm()
+
   const onSubmit = async data => {
     try {
       setLoading(true)
@@ -21,22 +26,63 @@ const LogEntryForm = ({ location, onClose }) => {
     }
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='log-entry-form'>
-      {error ? <h3 className='error'>{error}</h3> : null}
-      <label htmlFor='title'>Title</label>
-      <input name='title' required ref={register} />
-      <label htmlFor='comments'>Comments</label>
-      <textarea name='comments' rows={3} ref={register}></textarea>
-      <label htmlFor='description'>Description</label>
-      <textarea name='description' rows={3} ref={register}></textarea>
-      <label htmlFor='image'>Image</label>
-      <input name='image' ref={register} />
-      <label htmlFor='visitedAt'>Visited On</label>
-      <input name='visitedAt' type='date' required ref={register} />
-      <label htmlFor='rating'>Rating</label>
-      <input name='rating' type='number' min={0} max={10} ref={register} />
-      <button disabled={loading}>{loading ? 'Loading...' : 'Create Entry'}</button>
-    </form>
+    <Container className='log-entry-form'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {error ? <h3 className='error'>{error}</h3> : null}
+        <TextField
+          name='title'
+          required
+          label='Title'
+          inputRef={register}
+          fullWidth
+          className='field'
+        />
+        <TextField
+          name='comments'
+          label='Comments'
+          rows={3}
+          multiline
+          inputRef={register}
+          fullWidth
+          className='field'
+        />
+        <TextField
+          name='description'
+          label='Description'
+          rows={3}
+          multiline
+          inputRef={register}
+          fullWidth
+          className='field'
+        />
+        <TextField name='image' label='Image' inputRef={register} fullWidth />
+        <Controller
+          as={<DatePicker />}
+          name='visitedAt'
+          label='Visited On'
+          control={control}
+          onChange={([selectedDate]) => {
+            // React Select return object instead of value for selection
+            return { value: selectedDate }
+          }}
+          required
+          fullWidth
+          defaultValue={null}
+        />
+        <TextField
+          name='rating'
+          type='number'
+          label='Rating'
+          min={0}
+          max={10}
+          inputRef={register}
+          fullWidth
+        />
+        <Button type='submit' variant='contained' disabled={loading}>
+          {loading ? 'Loading...' : 'Create Entry'}
+        </Button>
+      </form>
+    </Container>
   )
 }
 
