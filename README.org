@@ -6,12 +6,10 @@
 #+TODO: TODO IN-PROGRESS BLOCKED DONE
 #+OPTIONS:   num:nil toc:nil p:t
 
-* Pinpoints
-  This project is currently deployed live, and very much work-in-progress, \\
-  at: https://pinpoints-client.now.sh/. Please see the [[#roadmap][Roadmap]] for more information.
+* Overview
+  This project is currently deployed live, and very much work-in-progress, at: https://pinpoints-client.now.sh/. Please see the [[#roadmap][Roadmap]] for more information.
   A small JavaScript application built with React and node to log points on a map.
-  This project uses [[https://uber.github.io/react-map-gl/][React Map GL]] to display a [[https://www.mapbox.com/][Mapbox]] map. The client gets data via \\
-  a node backend connected to a MongoDB store. 
+  This project uses [[https://uber.github.io/react-map-gl/][React Map GL]] to display a [[https://www.mapbox.com/][Mapbox]] map. The client gets data via a node backend connected to a MongoDB store. 
 * Setup
   Ensure you have =mongodb= and =node= and =npm= installed
 ** Server
@@ -21,30 +19,42 @@
 ** Client
    - =yarn install= :: install dependencies
    - =yarn start= :: start local development server
+** Deploying
+   Server and client are separately deployed to [[https://github.com/zeit/now][Zeit Now]] via now.json located in =server/now.json= and =client/public/now.json=. Now must be installed, with the correct environment variables configured in each of the =now.json= files. Now can be helpfully configured with the use of =npx now-config= in each of the appropriate directories. Some of the values, such as =CORS_ORIGIN=, may need to be configured after first deployment.
+*** Server
+   To deploy the server, navigate to =server/= and run =now=. It may ask some more questions about the deployment within your Now project. Afterwards, it should return a deployed URL.
+*** Client
+   - create a new client build with =npm run build=
+   - copy =client/public/now.json= to =client/bulid=
+   - run =now= from  =client/bulid=, again you may have to respond to some deployment config questions   
 * Current Functionality
   * displays a mapbox map centered around the Great Lakes
   * displays points (if any) from the DB
   * points have popups with more data
   * new points can be created via double-clicking the map
-* Roadmap [2/9]
+* Roadmap [2/11]
   * [ ] add links to this doc (references, deployment info)
   * [X] deploy server
   * [X] deploy client
-  * [ ] UI enhancements [0/4]
-    * [ ] bootstrap
+  * [-] UI enhancements [1/5]
+    * [X] bootstrap / Material UI
     * [ ] theme
+    * [ ] icons
     * [ ] logo?
-    * [ ] sync across sessions
+    * [ ] favour full/split-screen forms over mapbox popups
+  * [ ] STRETCH: sync across sessions (push updates)
   * [ ] image uploads
-  * [ ] set defaults for quick-add [0/2]
+  * [ ] Edit/delete entries
+  * [ ] set defaults for quick-add [0/1]
     * [ ] use geolocation ([[https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol][GeolocateControl]])
-    * [ ] use Date.now() for visitedAt (not in UI)
   * [ ] search for real locations [0/3]
-    * [ ] find API
+    * [ ] find API 
+      - Mapbox Geocoder? :: (https://github.com/wheredoesyourmindgo/react-mui-mapbox-geocoder#readme)
     * [ ] query API from backend
     * [ ] build frontend component and plumb to backend
   * [ ] multi-tenancy
   * [ ] deep-linking to entries
 * Known Issues
+  * LogEntryForm opens out of view on mobile devices
   * Dates are not localized in/out of DB
   * map captures keybaord input and moves map when using arrow keys
